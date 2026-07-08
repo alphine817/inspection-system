@@ -1,10 +1,15 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ApiError } from '../../context/AuthProvider'
+import { SIGNUP_ROLE_OPTIONS } from '../../constants/rbac'
+import useAuth from '../../hooks/useAuth'
+import { splitFullName } from '../../utils/auth'
 import { hasValidationErrors } from '../../utils/validation'
 import { validateSignUp } from '../../utils/authValidation'
 import Button from '../ui/Button'
 import AuthFooterLink from './AuthFooterLink'
 import AuthInput from './AuthInput'
+import AuthSelect from './AuthSelect'
 import PasswordInput from './PasswordInput'
 
 const initialValues = {
@@ -13,13 +18,16 @@ const initialValues = {
   password: '',
   confirmPassword: '',
   companyName: '',
+  role: '',
 }
 
 export default function SignUpForm() {
   const navigate = useNavigate()
+  const { register } = useAuth()
   const [values, setValues] = useState(initialValues)
   const [touched, setTouched] = useState({})
   const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const errors = useMemo(() => validateSignUp(values), [values])
 
@@ -37,20 +45,32 @@ export default function SignUpForm() {
 
   async function handleSubmit(event) {
     event.preventDefault()
+    setSubmitError('')
     setTouched({
       fullName: true,
       email: true,
       password: true,
       confirmPassword: true,
       companyName: true,
+      role: true,
     })
 
     if (hasValidationErrors(errors)) return
 
+    const { firstName, lastName } = splitFullName(values.fullName)
+
     setSubmitting(true)
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500))
-      navigate('/dashboard')
+      const { redirectTo } = await register({
+        email: values.email.trim(),
+        password: values.password,
+        first_name: firstName,
+        last_name: lastName,
+        role: values.role,
+      })
+      navigate(redirectTo, { replace: true })
+    } catch (err) {
+      setSubmitError(err instanceof ApiError ? err.message : 'Unable to create account.')
     } finally {
       setSubmitting(false)
     }
@@ -63,6 +83,12 @@ export default function SignUpForm() {
       </h1>
 
       <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit} noValidate>
+        {submitError && (
+          <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300" role="alert">
+            {submitError}
+          </p>
+        )}
+
         <AuthInput
           type="text"
           name="fullName"
@@ -86,6 +112,17 @@ export default function SignUpForm() {
           onChange={(event) => updateField('email', event.target.value)}
           onBlur={() => handleBlur('email')}
           error={visibleErrors.email}
+        />
+
+        <AuthSelect
+          name="role"
+          label="Account Type"
+          placeholder="Select your role"
+          options={SIGNUP_ROLE_OPTIONS}
+          value={values.role}
+          onChange={(event) => updateField('role', event.target.value)}
+          onBlur={() => handleBlur('role')}
+          error={visibleErrors.role}
         />
 
         <PasswordInput

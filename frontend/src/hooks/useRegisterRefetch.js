@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { useOutletContext } from 'react-router-dom'
 
 export function useRegisterRefetch(refetch) {
-  const { registerRefetch } = useOutletContext()
+  const context = useOutletContext() ?? {}
+  const { registerRefetch } = context
 
   useEffect(() => {
     registerRefetch?.(refetch)

@@ -38,7 +38,7 @@ export default function DashboardPage() {
   useEffect(() => {
     if (location.state?.scrollToSchedule) {
       scrollToScheduleForm()
-      navigate('/dashboard', { replace: true, state: {} })
+      navigate('/admin/dashboard', { replace: true, state: {} })
     }
   }, [location.state, navigate])
 
@@ -80,7 +80,7 @@ export default function DashboardPage() {
             properties={data?.properties ?? []}
             units={data?.units ?? []}
             loading={loading}
-            onAddProperty={() => navigate('/properties')}
+            onAddProperty={() => navigate('/admin/properties')}
           />
 
           <div ref={formRef}>

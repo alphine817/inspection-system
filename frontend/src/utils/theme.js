@@ -3,12 +3,13 @@ export const THEME_STORAGE_KEY = 'propstat-theme'
 export const THEMES = {
   LIGHT: 'light',
   DARK: 'dark',
+  SYSTEM: 'system',
 }
 
 export function getStoredTheme() {
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY)
-    if (stored === THEMES.DARK || stored === THEMES.LIGHT) return stored
+    if (stored === THEMES.DARK || stored === THEMES.LIGHT || stored === THEMES.SYSTEM) return stored
   } catch {
     /* localStorage unavailable */
   }
@@ -20,9 +21,19 @@ export function getSystemTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? THEMES.DARK : THEMES.LIGHT
 }
 
+export function resolveTheme(theme) {
+  if (theme === THEMES.SYSTEM) {
+    return getSystemTheme()
+  }
+
+  return theme === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT
+}
+
 export function applyTheme(theme) {
   const root = document.documentElement
-  if (theme === THEMES.DARK) {
+  const resolvedTheme = resolveTheme(theme)
+
+  if (resolvedTheme === THEMES.DARK) {
     root.classList.add('dark')
   } else {
     root.classList.remove('dark')

@@ -9,7 +9,9 @@ import Input from '../components/ui/Input'
 import Select from '../components/ui/Select'
 import StatusBadge from '../components/ui/StatusBadge'
 import { ListSkeleton } from '../components/ui/Skeleton'
+import useTheme from '../hooks/useTheme'
 import { useRegisterRefetch } from '../hooks/useRegisterRefetch'
+import { THEMES } from '../utils/theme'
 import { hasValidationErrors } from '../utils/validation'
 import {
   DATE_FORMAT_OPTIONS,
@@ -144,6 +146,26 @@ function SettingsForm({
   healthOk,
   checkHealth,
 }) {
+  const { theme, setTheme, isDark } = useTheme()
+
+  function handleThemeToggle(checked) {
+    if (checked) {
+      setTheme(THEMES.DARK)
+      return
+    }
+
+    setTheme(THEMES.LIGHT)
+  }
+
+  function handleSystemPreferenceToggle(checked) {
+    if (checked) {
+      setTheme(THEMES.SYSTEM)
+      return
+    }
+
+    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? THEMES.DARK : THEMES.LIGHT)
+  }
+
   return (
     <form className="space-y-6" onSubmit={handleSave} noValidate>
       {saved && (
@@ -269,6 +291,20 @@ function SettingsForm({
               description="Reduce row padding on desktop data tables"
               checked={values.compactTables}
               onChange={(checked) => updateField('compactTables', checked)}
+            />
+            <SettingsToggle
+              id="darkMode"
+              label="Dark mode"
+              description="Switch the interface to the darker color palette"
+              checked={isDark}
+              onChange={handleThemeToggle}
+            />
+            <SettingsToggle
+              id="systemPreference"
+              label="Use system preference"
+              description="Follow your device's light or dark appearance setting"
+              checked={theme === THEMES.SYSTEM}
+              onChange={handleSystemPreferenceToggle}
             />
           </div>
         </SettingsSection>

@@ -90,7 +90,7 @@ export default function InspectionsPage() {
   }, [data?.inspections, lookups, search, statusFilter])
 
   function handleSchedule() {
-    navigate('/dashboard', { state: { scrollToSchedule: true } })
+    navigate('/admin/dashboard', { state: { scrollToSchedule: true } })
   }
 
   if (error) {

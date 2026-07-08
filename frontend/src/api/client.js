@@ -1,3 +1,5 @@
+import { getAuthToken } from '../utils/auth'
+
 export class ApiError extends Error {
   constructor(message, status) {
     super(message)
@@ -8,11 +10,15 @@ export class ApiError extends Error {
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? ''
 
-async function request(path, { body, headers, ...options } = {}) {
+async function request(path, { body, headers, auth = true, ...options } = {}) {
+  const authHeaders =
+    auth && getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {}
+
   const response = await fetch(`${BASE_URL}${path}`, {
     ...options,
     headers: {
       Accept: 'application/json',
+      ...authHeaders,
       ...(body != null ? { 'Content-Type': 'application/json' } : {}),
       ...headers,
     },
@@ -38,7 +44,11 @@ async function request(path, { body, headers, ...options } = {}) {
 }
 
 export const api = {
-  health: () => request('/api/health'),
+  health: () => request('/api/health', { auth: false }),
+  login: (payload) =>
+    request('/api/auth/login', { method: 'POST', body: payload, auth: false }),
+  register: (payload) =>
+    request('/api/auth/register', { method: 'POST', body: payload, auth: false }),
   getDashboardStats: () => request('/api/dashboard'),
   getProperties: () => request('/api/properties'),
   getUnits: (propertyId) =>
@@ -57,6 +67,8 @@ export const api = {
   createUser: (payload) => request('/api/users', { method: 'POST', body: payload }),
   createProperty: (payload) => request('/api/properties', { method: 'POST', body: payload }),
   createInspection: (payload) => request('/api/inspections', { method: 'POST', body: payload }),
+  updateInspection: (id, payload) =>
+    request(`/api/inspections/${id}`, { method: 'PATCH', body: payload }),
 }
 
 const INSPECTION_STATUSES = ['scheduled', 'in_progress', 'completed', 'cancelled']

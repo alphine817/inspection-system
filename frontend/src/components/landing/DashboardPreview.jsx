@@ -101,7 +101,7 @@ export default function DashboardPreview() {
             </ul>
 
             <div className="mt-10">
-              <Link to="/dashboard">
+              <Link to="/login">
                 <Button size="lg">Open Live Dashboard</Button>
               </Link>
             </div>

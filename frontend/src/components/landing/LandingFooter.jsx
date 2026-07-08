@@ -29,7 +29,7 @@ export default function LandingFooter() {
             Preview
           </a>
           <Link
-            to="/dashboard"
+            to="/login"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400"
           >
             Dashboard

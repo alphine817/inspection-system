@@ -49,5 +49,9 @@ export function validateSignUp(values) {
     errors.companyName = 'Company name is required.'
   }
 
+  if (!values.role) {
+    errors.role = 'Please select an account type.'
+  }
+
   return errors
 }

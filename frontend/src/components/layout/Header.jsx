@@ -4,7 +4,7 @@ import ThemeToggle from '../ui/ThemeToggle'
 
 export default function Header({ title, subtitle, onMenuToggle, menuOpen, onRefresh, refreshing }) {
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/90">
+    <header className="sticky top-0 z-20 border-b border-slate-200 bg-slate-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/95">
       <div className="flex items-start justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-start gap-3">
           <button

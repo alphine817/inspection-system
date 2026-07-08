@@ -5,6 +5,7 @@ import {
   getStoredTheme,
   initTheme,
   persistTheme,
+  resolveTheme,
 } from '../utils/theme'
 
 export const ThemeContext = createContext(null)
@@ -17,18 +18,32 @@ export default function ThemeProvider({ children }) {
     persistTheme(theme)
   }, [theme])
 
+  useEffect(() => {
+    if (theme !== THEMES.SYSTEM) return undefined
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = () => applyTheme(theme)
+
+    mediaQuery.addEventListener?.('change', handleChange)
+    return () => mediaQuery.removeEventListener?.('change', handleChange)
+  }, [theme])
+
   const setTheme = useCallback((nextTheme) => {
-    setThemeState(nextTheme === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT)
+    setThemeState(nextTheme === THEMES.DARK || nextTheme === THEMES.LIGHT || nextTheme === THEMES.SYSTEM ? nextTheme : THEMES.LIGHT)
   }, [])
 
   const toggleTheme = useCallback(() => {
-    setThemeState((current) => (current === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK))
+    setThemeState((current) => {
+      if (current === THEMES.DARK) return THEMES.LIGHT
+      if (current === THEMES.LIGHT) return THEMES.DARK
+      return THEMES.DARK
+    })
   }, [])
 
   const value = useMemo(
     () => ({
       theme,
-      isDark: theme === THEMES.DARK,
+      isDark: resolveTheme(theme) === THEMES.DARK,
       setTheme,
       toggleTheme,
     }),
