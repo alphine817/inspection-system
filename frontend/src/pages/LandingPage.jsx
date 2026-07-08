@@ -8,7 +8,7 @@ import RentAutomationSection from '../components/landing/RentAutomationSection'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-svh bg-slate-50">
+    <div className="min-h-svh bg-slate-50 dark:bg-slate-950">
       <LandingNavbar />
       <main className="pt-[81px]">
         <HeroSection />

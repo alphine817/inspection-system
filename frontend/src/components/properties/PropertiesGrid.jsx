@@ -15,7 +15,7 @@ export default function PropertiesGrid({
     return (
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 3 }).map((_, index) => (
-          <div key={index} className="rounded-2xl border border-slate-200 bg-white p-5">
+          <div key={index} className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800/60 dark:bg-slate-900/40">
             <ListSkeleton rows={2} />
           </div>
         ))}
@@ -64,8 +64,8 @@ export function PropertiesToolbar({ search, onSearchChange, onAddProperty, resul
         />
       </div>
       <div className="flex items-center justify-between gap-3 sm:justify-end">
-        <p className="text-sm text-slate-500">
-          <span className="font-semibold text-slate-700">{resultCount}</span> properties
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          <span className="font-semibold text-slate-700 dark:text-slate-300">{resultCount}</span> properties
         </p>
         <button
           type="button"

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function AuthFooterLink({ prompt, linkText, to }) {
   return (
-    <p className="mt-8 text-center text-sm text-slate-600">
+    <p className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
       {prompt}{' '}
       <Link
         to={to}

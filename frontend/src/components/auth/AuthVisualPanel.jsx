@@ -1,5 +1,6 @@
 import { Home } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import ThemeToggle from '../ui/ThemeToggle'
 
 export default function AuthVisualPanel({
   backgroundSrc,
@@ -19,13 +20,14 @@ export default function AuthVisualPanel({
 
       <div className="absolute inset-0 bg-white/85 dark:bg-slate-950/80" aria-hidden="true" />
 
-      <div className="absolute left-0 top-0 z-50 flex w-full items-center justify-start px-4 py-4 sm:px-6 lg:px-8">
+      <div className="absolute left-0 top-0 z-50 flex w-full items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link to="/" className="inline-flex items-center gap-3 rounded-full bg-white/80 px-3 py-2 shadow-sm backdrop-blur-sm dark:bg-slate-900/70">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-600 text-white shadow-sm">
             <Home className="h-4 w-4" aria-hidden="true" />
           </div>
           <span className="text-sm font-semibold text-slate-800 dark:text-slate-100">PropStat Pro</span>
         </Link>
+        <ThemeToggle className="rounded-full bg-white/80 shadow-sm backdrop-blur-sm dark:bg-slate-900/70" />
       </div>
 
       <div className="relative z-10 w-full max-w-md">

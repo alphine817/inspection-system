@@ -33,16 +33,16 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+    <section id="features" className="bg-slate-50 py-16 dark:bg-slate-950 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
             Core pillars
           </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink dark:text-slate-100 sm:text-4xl">
             Everything you need to run inspections at scale
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
             Built for property managers who need clarity, speed, and accountability across
             every unit in their portfolio.
           </p>
@@ -55,9 +55,9 @@ export default function FeaturesSection() {
             return (
               <article
                 key={feature.title}
-                className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-brand-200 hover:shadow-md sm:p-8"
+                className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-brand-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-800 sm:p-8"
               >
-                <div className="mb-5 overflow-hidden rounded-xl border border-slate-100">
+                <div className="mb-5 overflow-hidden rounded-xl border border-slate-100 dark:border-slate-800">
                   <img
                     src={feature.image}
                     alt={feature.imageAlt}
@@ -76,8 +76,8 @@ export default function FeaturesSection() {
                   </span>
                 </div>
 
-                <h3 className="mt-6 text-xl font-bold text-ink">{feature.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 sm:text-base">
+                <h3 className="mt-6 text-xl font-bold text-ink dark:text-slate-100">{feature.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
                   {feature.description}
                 </p>
               </article>

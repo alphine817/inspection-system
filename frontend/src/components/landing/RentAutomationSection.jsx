@@ -43,7 +43,7 @@ const benefits = [
 
 export default function RentAutomationSection() {
   return (
-    <section id="rent-automation" className="scroll-mt-24 bg-slate-50 py-16 sm:py-20 lg:py-24">
+    <section id="rent-automation" className="scroll-mt-24 bg-slate-50 py-16 dark:bg-slate-950 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="relative order-2 lg:order-1">
@@ -52,7 +52,7 @@ export default function RentAutomationSection() {
               aria-hidden="true"
             />
 
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/70">
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/70 dark:border-slate-700 dark:bg-slate-800 dark:shadow-slate-900/70">
               <img
                 src={landingImages.rentAutomation}
                 alt="Property manager reviewing rent collection dashboard on laptop"
@@ -62,12 +62,12 @@ export default function RentAutomationSection() {
               />
 
               <div className="space-y-4 p-5 sm:p-6">
-                <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-4 dark:border-slate-700">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       Rent ledger
                     </p>
-                    <p className="mt-1 text-lg font-bold text-ink">March collections</p>
+                    <p className="mt-1 text-lg font-bold text-ink dark:text-slate-100">March collections</p>
                   </div>
                   <span className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 ring-1 ring-brand-100">
                     92% collected
@@ -82,10 +82,10 @@ export default function RentAutomationSection() {
                   ].map((row) => (
                     <li
                       key={row.unit}
-                      className="flex items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
+                      className="flex items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-900"
                     >
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-ink">{row.unit}</p>
+                        <p className="truncate text-sm font-semibold text-ink dark:text-slate-100">{row.unit}</p>
                         <p className="text-xs text-slate-500">{row.amount}</p>
                       </div>
                       <span
@@ -104,8 +104,8 @@ export default function RentAutomationSection() {
 
                 <div className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3 ring-1 ring-brand-100">
                   <Receipt className="h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
-                  <p className="text-xs text-slate-700 sm:text-sm">
-                    <span className="font-semibold text-ink">3 reminders sent</span> automatically
+                  <p className="text-xs text-slate-700 dark:text-slate-300 sm:text-sm">
+                    <span className="font-semibold text-ink dark:text-slate-100">3 reminders sent</span> automatically
                     this week — no manual follow-up needed.
                   </p>
                 </div>
@@ -117,10 +117,10 @@ export default function RentAutomationSection() {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
               Rent automation
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink dark:text-slate-100 sm:text-4xl">
               Collect rent on autopilot
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
               PropStat Pro connects rent collection with your inspection workflow — so you
               always know which units are paid, overdue, or ready for the next visit.
             </p>
@@ -136,8 +136,8 @@ export default function RentAutomationSection() {
                     </div>
                     <div>
                       <p className="text-xs font-bold tracking-wide text-brand-600">{item.step}</p>
-                      <h3 className="mt-0.5 text-base font-bold text-ink">{item.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                      <h3 className="mt-0.5 text-base font-bold text-ink dark:text-slate-100">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                         {item.description}
                       </p>
                     </div>
@@ -148,7 +148,7 @@ export default function RentAutomationSection() {
 
             <ul className="mt-8 space-y-3">
               {benefits.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-slate-700 sm:text-base">
+                <li key={item} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 sm:text-base">
                   <CheckCircle2
                     className="mt-0.5 h-5 w-5 shrink-0 text-brand-600"
                     aria-hidden="true"

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Home, Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import ThemeToggle from '../ui/ThemeToggle'
 
 const navLinks = [
   { href: '#features', label: 'Features' },
@@ -18,7 +19,7 @@ export default function LandingNavbar() {
   }
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link
           to="/"
@@ -29,7 +30,7 @@ export default function LandingNavbar() {
             <Home className="h-5 w-5" aria-hidden="true" />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-base font-bold text-ink">PropStat Pro</p>
+            <p className="truncate text-base font-bold text-ink dark:text-slate-100">PropStat Pro</p>
           </div>
         </Link>
 
@@ -38,7 +39,7 @@ export default function LandingNavbar() {
             <a
               key={link.href}
               href={link.href}
-              className="group relative rounded-lg py-1 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:text-brand-600 focus-visible:ring-brand-500"
+              className="group relative rounded-lg py-1 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:text-brand-600 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:text-brand-400"
             >
               {link.label}
               <span
@@ -50,9 +51,10 @@ export default function LandingNavbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <ThemeToggle />
           <Link
             to="/login"
-            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 hover:text-brand-600 focus-visible:ring-brand-500"
+            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 hover:text-brand-600 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-400"
           >
             Sign In
           </Link>
@@ -64,20 +66,23 @@ export default function LandingNavbar() {
           </Link>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex rounded-lg p-2 text-slate-600 transition-colors hover:bg-slate-100 active:bg-slate-200 lg:hidden"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-        >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-flex rounded-lg p-2 text-slate-600 transition-colors hover:bg-slate-100 active:bg-slate-200 dark:text-slate-300 dark:hover:bg-slate-800 dark:active:bg-slate-700"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       <div
         className={[
-          'border-t border-slate-200 bg-white px-4 py-4 shadow-sm lg:hidden',
+          'border-t border-slate-200 bg-white px-4 py-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:hidden',
           menuOpen ? 'block' : 'hidden',
         ].join(' ')}
       >
@@ -86,7 +91,7 @@ export default function LandingNavbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500"
+              className="rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-400"
               onClick={closeMenu}
             >
               {link.label}
@@ -94,7 +99,7 @@ export default function LandingNavbar() {
           ))}
           <Link
             to="/login"
-            className="rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500"
+            className="rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-400"
             onClick={closeMenu}
           >
             Sign In

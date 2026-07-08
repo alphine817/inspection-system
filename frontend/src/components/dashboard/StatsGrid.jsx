@@ -9,33 +9,33 @@ import {
 import { formatNumber } from '../../utils/formatters'
 
 const toneStyles = {
-  brand: 'bg-brand-50 text-brand-700 ring-brand-100',
-  success: 'bg-emerald-50 text-emerald-700 ring-emerald-100',
-  warning: 'bg-amber-50 text-amber-700 ring-amber-100',
-  danger: 'bg-red-50 text-red-700 ring-red-100',
-  neutral: 'bg-slate-100 text-slate-700 ring-slate-200',
+  brand: 'bg-brand-50 text-brand-700 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-400 dark:ring-brand-900/60',
+  success: 'bg-emerald-50 text-emerald-700 ring-emerald-100 dark:bg-emerald-950/50 dark:text-emerald-400 dark:ring-emerald-900/60',
+  warning: 'bg-amber-50 text-amber-700 ring-amber-100 dark:bg-amber-950/50 dark:text-amber-400 dark:ring-amber-900/60',
+  danger: 'bg-red-50 text-red-700 ring-red-100 dark:bg-red-950/50 dark:text-red-400 dark:ring-red-900/60',
+  neutral: 'bg-slate-100 text-slate-700 ring-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:ring-slate-700/40',
 }
 
 export default function StatCard({ label, value, hint, tone = 'neutral', icon: Icon, alert }) {
   return (
     <article
       className={[
-        'rounded-2xl border bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md',
-        alert ? 'border-red-200' : 'border-slate-200',
+        'rounded-2xl border bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md dark:bg-slate-900/50',
+        alert ? 'border-red-200 dark:border-red-900/60' : 'border-slate-200 dark:border-slate-800/60',
       ].join(' ')}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</p>
           <p
             className={[
               'mt-2 text-3xl font-bold tracking-tight',
-              alert ? 'text-red-700' : 'text-slate-900',
+              alert ? 'text-red-700 dark:text-red-400' : 'text-slate-900 dark:text-slate-100',
             ].join(' ')}
           >
             {formatNumber(value)}
           </p>
-          {hint && <p className="mt-1 truncate text-xs text-slate-500">{hint}</p>}
+          {hint && <p className="mt-1 truncate text-xs text-slate-500 dark:text-slate-400">{hint}</p>}
         </div>
         <div
           className={[

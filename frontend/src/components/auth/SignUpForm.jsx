@@ -58,7 +58,7 @@ export default function SignUpForm() {
 
   return (
     <>
-      <h1 className="mb-8 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+      <h1 className="mb-8 text-2xl font-bold tracking-tight text-ink dark:text-slate-100 sm:text-3xl">
         Create Your Account
       </h1>
 

@@ -82,16 +82,16 @@ export default function AddPropertyForm({ id = 'add-property-form', onSubmitted 
   return (
     <section
       id={id}
-      className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+      className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800/60 dark:bg-slate-900/50 sm:p-6"
     >
       <div className="mb-5">
-        <h2 className="text-lg font-bold text-slate-900">Add Property</h2>
-        <p className="text-sm text-slate-500">Register a new building in your portfolio</p>
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Add Property</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Register a new building in your portfolio</p>
       </div>
 
       {submitted && (
         <div
-          className="mb-5 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
+          className="mb-5 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300"
           role="status"
         >
           <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
@@ -101,7 +101,7 @@ export default function AddPropertyForm({ id = 'add-property-form', onSubmitted 
 
       {submitError && (
         <div
-          className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+          className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:border-red-900 dark:bg-red-950/50 dark:text-red-300"
           role="alert"
         >
           {submitError}

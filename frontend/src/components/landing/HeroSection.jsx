@@ -11,18 +11,18 @@ const highlights = [
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative overflow-hidden bg-white dark:bg-slate-900">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <img
           src={landingImages.hero}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover object-right opacity-[0.14] sm:opacity-[0.18] lg:opacity-30"
+          className="absolute inset-0 h-full w-full object-cover object-right opacity-[0.14] sm:opacity-[0.18] lg:opacity-30 dark:opacity-[0.08]"
           loading="eager"
           decoding="async"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-[58%] via-white/95 to-white/55 sm:from-[52%] lg:from-white lg:via-white/90 lg:to-white/25" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--color-brand-50)_0%,_transparent_55%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-[58%] via-white/95 to-white/55 sm:from-[52%] lg:from-white lg:via-white/90 lg:to-white/25 dark:from-slate-900 dark:from-[58%] dark:via-slate-900/95 dark:to-slate-900/55 dark:sm:from-[52%] dark:lg:from-slate-900 dark:lg:via-slate-900/90 dark:lg:to-slate-900/25" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--color-brand-50)_0%,_transparent_55%)] dark:bg-[radial-gradient(ellipse_at_top_right,_rgb(16_158_22_/_0.08)_0%,_transparent_55%)]" />
       </div>
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
@@ -31,12 +31,12 @@ export default function HeroSection() {
             Rental Property Inspection System
           </span>
 
-          <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
+          <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-ink dark:text-slate-100 sm:text-5xl lg:text-[3.25rem]">
             Inspect smarter.
             <span className="block text-brand-600">Manage every rental with confidence.</span>
           </h1>
 
-          <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mt-6 text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
             RentalInspect brings property portfolios, automated scheduling, and digital
             inspection checklists into one clean dashboard — built for managers, inspectors,
             and tenants.
@@ -44,7 +44,7 @@ export default function HeroSection() {
 
           <ul className="mt-8 space-y-3">
             {highlights.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-slate-700 sm:text-base">
+              <li key={item} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 sm:text-base">
                 <CheckCircle2
                   className="mt-0.5 h-5 w-5 shrink-0 text-brand-600"
                   aria-hidden="true"
@@ -82,7 +82,7 @@ export default function HeroSection() {
               className="absolute -inset-4 rounded-3xl bg-brand-50/80 blur-2xl"
               aria-hidden="true"
             />
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60">
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 dark:border-slate-700 dark:shadow-slate-900/60">
               <img
                 src={landingImages.heroSide}
                 alt="Property manager reviewing a rental portfolio on a tablet"
@@ -92,13 +92,13 @@ export default function HeroSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-ink/10 to-transparent" />
             </div>
-            <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/60">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/60 dark:border-slate-700 dark:bg-slate-800 dark:shadow-slate-900/60">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4 dark:border-slate-700">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                     Quick signup
                   </p>
-                  <p className="mt-1 text-lg font-bold text-ink">Create your account</p>
+                  <p className="mt-1 text-lg font-bold text-ink dark:text-slate-100">Create your account</p>
                 </div>
                 <span className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 ring-1 ring-brand-100">
                   Free
@@ -107,14 +107,14 @@ export default function HeroSection() {
 
               <form className="mt-5 space-y-4" onSubmit={(event) => event.preventDefault()} noValidate>
                 <div>
-                  <label htmlFor="hero-email" className="mb-1.5 block text-sm font-semibold text-ink">
+                  <label htmlFor="hero-email" className="mb-1.5 block text-sm font-semibold text-ink dark:text-slate-200">
                     Work email
                   </label>
                   <input
                     id="hero-email"
                     type="email"
                     placeholder="you@company.com"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-slate-400 transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-slate-400 transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                   />
                 </div>
                 <div>
@@ -128,7 +128,7 @@ export default function HeroSection() {
                     id="hero-password"
                     type="password"
                     placeholder="Minimum 8 characters"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-slate-400 transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-slate-400 transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                   />
                 </div>
                 <Link to="/signup" className="block">

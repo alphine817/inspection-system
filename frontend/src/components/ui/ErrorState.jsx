@@ -4,7 +4,7 @@ import Button from './Button'
 export default function ErrorState({ title = 'Unable to load data', message, onRetry }) {
   return (
     <div
-      className="flex flex-col items-center justify-center rounded-2xl border border-red-200 bg-red-50/70 px-6 py-10 text-center"
+      className="flex flex-col items-center justify-center rounded-2xl border border-red-200 bg-red-50/70 px-6 py-10 text-center dark:border-red-900 dark:bg-red-950/50"
       role="alert"
     >
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">

@@ -148,7 +148,7 @@ function SettingsForm({
     <form className="space-y-6" onSubmit={handleSave} noValidate>
       {saved && (
         <div
-          className="flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
+          className="flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300"
           role="status"
         >
           <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
@@ -191,16 +191,16 @@ function SettingsForm({
             <ListSkeleton rows={2} />
           ) : (
             <div className="space-y-4">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700/40 dark:bg-slate-950/40">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   Base URL
                 </p>
-                <p className="mt-1 truncate text-sm font-medium text-slate-800">{apiBaseUrl}</p>
+                <p className="mt-1 truncate text-sm font-medium text-slate-800 dark:text-slate-200">{apiBaseUrl}</p>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Plug className="h-4 w-4 text-slate-500" aria-hidden="true" />
-                  <span className="text-sm font-semibold text-slate-700">Status</span>
+                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Status</span>
                   <StatusBadge
                     status={healthOk ? 'good' : 'failed'}
                     label={healthOk ? 'Connected' : 'Disconnected'}
@@ -209,7 +209,7 @@ function SettingsForm({
                 <button
                   type="button"
                   onClick={checkHealth}
-                  className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-brand-600 transition-colors hover:bg-brand-50 active:bg-brand-100"
+                  className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-brand-600 transition-colors hover:bg-brand-50 active:bg-brand-100 dark:text-brand-400 dark:hover:bg-brand-950/50 dark:active:bg-brand-900/40"
                 >
                   Test connection
                 </button>

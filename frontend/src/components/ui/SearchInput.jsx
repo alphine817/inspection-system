@@ -21,8 +21,8 @@ export default function SearchInput({
         placeholder={placeholder}
         className={[
           'w-full rounded-lg border border-slate-200 bg-white py-2.5 pr-10 pl-10 text-sm text-slate-800 shadow-sm',
-          'placeholder:text-slate-400',
-          'transition-all duration-200 hover:border-slate-300',
+          'placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500',
+          'transition-all duration-200 hover:border-slate-300 dark:hover:border-slate-600',
           'focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none',
         ].join(' ')}
       />
@@ -30,7 +30,7 @@ export default function SearchInput({
         <button
           type="button"
           onClick={() => onChange('')}
-          className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 active:bg-slate-200"
+          className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 active:bg-slate-200 dark:hover:bg-slate-700 dark:hover:text-slate-300 dark:active:bg-slate-600"
           aria-label="Clear search"
         >
           <X className="h-4 w-4" />

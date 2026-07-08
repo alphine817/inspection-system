@@ -69,17 +69,17 @@ const statusToneMap = {
 
 export default function DashboardPreview() {
   return (
-    <section id="preview" className="bg-white py-16 sm:py-20 lg:py-24">
+    <section id="preview" className="bg-white py-16 dark:bg-slate-900 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
               Dashboard preview
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink dark:text-slate-100 sm:text-4xl">
               Your portfolio at a glance
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
               See inspections due today, overdue work, and property stats in a single view.
               The same clean interface powers every page in RentalInspect.
             </p>
@@ -90,7 +90,7 @@ export default function DashboardPreview() {
                 'Filterable inspection lists with status badges',
                 'Responsive layout from mobile to desktop',
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-slate-700 sm:text-base">
+                <li key={item} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 sm:text-base">
                   <CheckCircle2
                     className="mt-0.5 h-5 w-5 shrink-0 text-brand-600"
                     aria-hidden="true"
@@ -113,8 +113,8 @@ export default function DashboardPreview() {
               aria-hidden="true"
             />
 
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/70">
-              <div className="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-4 py-3">
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/70 dark:border-slate-700 dark:bg-slate-800 dark:shadow-slate-900/70">
+              <div className="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-900">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-400" aria-hidden="true" />
                 <span className="h-2.5 w-2.5 rounded-full bg-amber-400" aria-hidden="true" />
                 <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden="true" />
@@ -126,12 +126,12 @@ export default function DashboardPreview() {
               <div className="space-y-4 p-4 sm:p-6">
                 <div className="flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-bold text-ink">Inspection Dashboard</p>
+                    <p className="truncate text-sm font-bold text-ink dark:text-slate-100">Inspection Dashboard</p>
                     <p className="hidden truncate text-xs text-slate-500 sm:block">
                       Monitor properties, units, and inspection activity
                     </p>
                   </div>
-                  <div className="hidden shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 sm:block">
+                  <div className="hidden shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 sm:block">
                     Refresh
                   </div>
                 </div>
@@ -142,14 +142,14 @@ export default function DashboardPreview() {
                     return (
                       <div
                         key={stat.label}
-                        className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4"
+                        className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800 sm:p-4"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
                             <p className="truncate text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">
                               {stat.label}
                             </p>
-                            <p className="mt-1 text-xl font-bold text-ink sm:text-2xl">
+                            <p className="mt-1 text-xl font-bold text-ink dark:text-slate-100 sm:text-2xl">
                               {stat.value}
                             </p>
                           </div>
@@ -167,7 +167,7 @@ export default function DashboardPreview() {
                   })}
                 </div>
 
-                <div className="rounded-xl border border-slate-200 bg-white p-3">
+                <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
                   <p className="px-1 text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">
                     Portfolio
                   </p>
@@ -175,7 +175,7 @@ export default function DashboardPreview() {
                     {propertyThumbnails.map((property) => (
                       <div
                         key={property.name}
-                        className="overflow-hidden rounded-xl border border-slate-100 bg-slate-50"
+                        className="overflow-hidden rounded-xl border border-slate-100 bg-slate-50 dark:border-slate-700 dark:bg-slate-900"
                       >
                         <img
                           src={property.image}
@@ -184,7 +184,7 @@ export default function DashboardPreview() {
                           loading="lazy"
                           decoding="async"
                         />
-                        <p className="truncate px-2 py-1.5 text-[10px] font-semibold text-ink sm:text-xs">
+                        <p className="truncate px-2 py-1.5 text-[10px] font-semibold text-ink dark:text-slate-200 sm:text-xs">
                           {property.name}
                         </p>
                       </div>
@@ -192,18 +192,18 @@ export default function DashboardPreview() {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 bg-white">
-                  <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-4 py-3">
+                <div className="rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+                  <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-4 py-3 dark:border-slate-700">
                     <div className="flex items-center gap-2">
                       <ClipboardList className="h-4 w-4 text-brand-600" aria-hidden="true" />
-                      <p className="text-sm font-bold text-ink">Recent Inspections</p>
+                      <p className="text-sm font-bold text-ink dark:text-slate-100">Recent Inspections</p>
                     </div>
                     <span className="hidden text-xs font-semibold text-brand-600 sm:inline">
                       Schedule
                     </span>
                   </div>
 
-                  <ul className="divide-y divide-slate-100">
+                  <ul className="divide-y divide-slate-100 dark:divide-slate-700">
                     {inspections.map((item) => (
                       <li
                         key={item.unit}
@@ -213,12 +213,12 @@ export default function DashboardPreview() {
                           <img
                             src={item.propertyImage}
                             alt=""
-                            className="h-10 w-10 shrink-0 rounded-xl object-cover ring-1 ring-slate-200"
+                            className="h-10 w-10 shrink-0 rounded-xl object-cover ring-1 ring-slate-200 dark:ring-slate-600"
                             loading="lazy"
                             decoding="async"
                           />
                           <div className="min-w-0">
-                            <p className="truncate text-sm font-semibold text-ink">{item.unit}</p>
+                            <p className="truncate text-sm font-semibold text-ink dark:text-slate-100">{item.unit}</p>
                             <p className="flex items-center gap-1.5 truncate text-xs text-slate-500">
                               <img
                                 src={item.avatar}

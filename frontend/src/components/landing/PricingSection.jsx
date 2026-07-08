@@ -58,16 +58,16 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="scroll-mt-24 bg-white py-16 sm:py-20 lg:py-24">
+    <section id="pricing" className="scroll-mt-24 bg-white py-16 dark:bg-slate-900 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
             Pricing
           </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink dark:text-slate-100 sm:text-4xl">
             Simple plans that scale with your portfolio
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
             Start free, upgrade when you need rent automation, analytics, and unlimited
             properties. No hidden fees.
           </p>
@@ -80,8 +80,8 @@ export default function PricingSection() {
               className={[
                 'relative flex h-full flex-col rounded-2xl border p-6 sm:p-8',
                 plan.highlighted
-                  ? 'border-brand-200 bg-brand-50/40 shadow-lg shadow-brand-100/50 ring-2 ring-brand-500/20'
-                  : 'border-slate-200 bg-white shadow-sm',
+                  ? 'border-brand-200 bg-brand-50/40 shadow-lg shadow-brand-100/50 ring-2 ring-brand-500/20 dark:border-brand-800 dark:bg-brand-950/30 dark:shadow-brand-900/20'
+                  : 'border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900',
               ].join(' ')}
             >
               {plan.badge ? (
@@ -91,19 +91,19 @@ export default function PricingSection() {
               ) : null}
 
               <div>
-                <h3 className="text-lg font-bold text-ink">{plan.name}</h3>
+                <h3 className="text-lg font-bold text-ink dark:text-slate-100">{plan.name}</h3>
                 <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                  <span className="text-3xl font-bold tracking-tight text-ink dark:text-slate-100 sm:text-4xl">
                     {plan.price}
                   </span>
                   <span className="text-sm text-slate-500">/ {plan.period}</span>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">{plan.description}</p>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{plan.description}</p>
               </div>
 
               <ul className="mt-8 flex-1 space-y-3">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm text-slate-700">
+                  <li key={feature} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
                     <CheckCircle2
                       className="mt-0.5 h-4 w-4 shrink-0 text-brand-600"
                       aria-hidden="true"

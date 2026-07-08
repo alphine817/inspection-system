@@ -39,9 +39,9 @@ export default function InspectionsList({
 
   return (
     <>
-      <div className="hidden overflow-hidden rounded-xl border border-slate-200 lg:block">
-        <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-          <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
+      <div className="hidden overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800/60 lg:block">
+        <table className="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-800/60">
+          <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:bg-slate-800/40 dark:text-slate-400">
             <tr>
               <th className="px-4 py-3">Unit / Property</th>
               <th className="px-4 py-3">Inspector</th>
@@ -50,7 +50,7 @@ export default function InspectionsList({
               <th className="px-4 py-3">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 bg-white">
+          <tbody className="divide-y divide-slate-100 bg-white dark:divide-slate-800/60 dark:bg-slate-900/30">
             {inspections.map((inspection) => {
               const unit = unitsById[inspection.unit_id]
               const inspector = usersById[inspection.inspector_id]
@@ -59,20 +59,20 @@ export default function InspectionsList({
               return (
                 <tr
                   key={inspection.id}
-                  className="transition-colors hover:bg-slate-50/80"
+                  className="transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/50"
                 >
                   <td className="max-w-[240px] px-4 py-3">
-                    <p className="truncate font-semibold text-slate-900">
+                    <p className="truncate font-semibold text-slate-900 dark:text-slate-100">
                       {getUnitLabel(unit, propertiesById)}
                     </p>
                     {inspection.notes && (
-                      <p className="mt-0.5 truncate text-xs text-slate-500">{inspection.notes}</p>
+                      <p className="mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">{inspection.notes}</p>
                     )}
                   </td>
-                  <td className="max-w-[160px] truncate px-4 py-3 text-slate-600">
+                  <td className="max-w-[160px] truncate px-4 py-3 text-slate-600 dark:text-slate-400">
                     {getInspectorName(inspector)}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-slate-600">
+                  <td className="whitespace-nowrap px-4 py-3 text-slate-600 dark:text-slate-400">
                     {formatDateTime(inspection.scheduled_date)}
                   </td>
                   <td className="hidden whitespace-nowrap px-4 py-3 text-slate-600 xl:table-cell">
@@ -97,14 +97,14 @@ export default function InspectionsList({
           return (
             <article
               key={inspection.id}
-              className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-slate-800/60 dark:bg-slate-900/40"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="truncate font-semibold text-slate-900">
+                  <p className="truncate font-semibold text-slate-900 dark:text-slate-100">
                     {getUnitLabel(unit, propertiesById)}
                   </p>
-                  <p className="mt-1 text-xs text-slate-500">
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                     {formatDateTime(inspection.scheduled_date)}
                   </p>
                 </div>
@@ -112,15 +112,15 @@ export default function InspectionsList({
               </div>
               <dl className="mt-3 grid grid-cols-1 gap-2 text-sm">
                 <div className="flex justify-between gap-3">
-                  <dt className="text-slate-500">Inspector</dt>
-                  <dd className="truncate font-medium text-slate-700">
+                  <dt className="text-slate-500 dark:text-slate-400">Inspector</dt>
+                  <dd className="truncate font-medium text-slate-700 dark:text-slate-300">
                     {getInspectorName(inspector)}
                   </dd>
                 </div>
                 {inspection.completed_at && (
                   <div className="flex justify-between gap-3">
-                    <dt className="text-slate-500">Completed</dt>
-                    <dd className="truncate font-medium text-slate-700">
+                    <dt className="text-slate-500 dark:text-slate-400">Completed</dt>
+                    <dd className="truncate font-medium text-slate-700 dark:text-slate-300">
                       {formatDateTime(inspection.completed_at)}
                     </dd>
                   </div>
@@ -164,8 +164,8 @@ export function InspectionsToolbar({
           />
         </div>
         <div className="flex items-center justify-between gap-3 lg:justify-end">
-          <p className="text-sm text-slate-500">
-            <span className="font-semibold text-slate-700">{resultCount}</span> results
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            <span className="font-semibold text-slate-700 dark:text-slate-300">{resultCount}</span> results
           </p>
           <button
             type="button"

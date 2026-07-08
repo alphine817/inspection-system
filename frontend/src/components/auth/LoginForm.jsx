@@ -52,7 +52,7 @@ export default function LoginForm() {
     <>
       <div className="mb-8 flex items-center gap-3">
         <AuthBrandLogo showName={false} inline />
-        <h1 className="text-2xl font-bold tracking-tight text-ink">Sign in to PropStat Pro</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-ink dark:text-slate-100">Sign in to PropStat Pro</h1>
       </div>
 
       <form className="space-y-5" onSubmit={handleSubmit} noValidate>

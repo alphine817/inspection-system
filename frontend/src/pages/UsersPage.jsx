@@ -11,18 +11,18 @@ import { formatNumber, getInspectorName, matchesSearch } from '../utils/formatte
 
 function SummaryStat({ label, value, icon: Icon, tone = 'neutral' }) {
   const tones = {
-    brand: 'bg-brand-50 text-brand-700 ring-brand-100',
-    neutral: 'bg-slate-100 text-slate-700 ring-slate-200',
-    success: 'bg-emerald-50 text-emerald-700 ring-emerald-100',
-    warning: 'bg-amber-50 text-amber-700 ring-amber-100',
+    brand: 'bg-brand-50 text-brand-700 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-400 dark:ring-brand-900/60',
+    neutral: 'bg-slate-100 text-slate-700 ring-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:ring-slate-700/40',
+    success: 'bg-emerald-50 text-emerald-700 ring-emerald-100 dark:bg-emerald-950/50 dark:text-emerald-400 dark:ring-emerald-900/60',
+    warning: 'bg-amber-50 text-amber-700 ring-amber-100 dark:bg-amber-950/50 dark:text-amber-400 dark:ring-amber-900/60',
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800/60 dark:bg-slate-900/50">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
-          <p className="mt-1 text-2xl font-bold text-slate-900">{formatNumber(value)}</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</p>
+          <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-100">{formatNumber(value)}</p>
         </div>
         <div
           className={[
@@ -119,7 +119,7 @@ export default function UsersPage() {
       )}
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 xl:col-span-2">
+        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800/60 dark:bg-slate-900/50 sm:p-6 xl:col-span-2">
           <UsersToolbar
             search={search}
             onSearchChange={setSearch}
