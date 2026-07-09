@@ -15,6 +15,8 @@ from models import Property, Unit, User, UserRole, db
 # Stable identifiers used for duplicate detection
 ADMIN_EMAIL = "admin@rentalinspection.local"
 DEFAULT_ADMIN_PASSWORD = "Admin123!"
+TENANT_EMAIL = "tenant@rentalinspection.local"
+DEFAULT_TENANT_PASSWORD = "Tenant123!"
 
 PROPERTIES = [
     {
@@ -47,6 +49,25 @@ PROPERTIES = [
         ],
     },
 ]
+
+
+def get_or_create_tenant() -> tuple[User, bool]:
+    """Return the demo tenant user and whether it was newly created."""
+    tenant = User.query.filter_by(email=TENANT_EMAIL).first()
+    if tenant:
+        return tenant, False
+
+    tenant = User(
+        email=TENANT_EMAIL,
+        password_hash=generate_password_hash(DEFAULT_TENANT_PASSWORD),
+        first_name="Demo",
+        last_name="Tenant",
+        phone="+254700000010",
+        role=UserRole.TENANT,
+    )
+    db.session.add(tenant)
+    db.session.flush()
+    return tenant, True
 
 
 def get_or_create_admin() -> tuple[User, bool]:
@@ -124,15 +145,25 @@ def seed() -> None:
         if admin_created:
             created_users += 1
 
+        tenant, tenant_created = get_or_create_tenant()
+        if tenant_created:
+            created_users += 1
+
+        first_unit = None
         for property_data in PROPERTIES:
             property_, property_created = get_or_create_property(admin, property_data)
             if property_created:
                 created_properties += 1
 
             for unit_data in property_data["units"]:
-                _, unit_created = get_or_create_unit(property_, unit_data)
+                unit, unit_created = get_or_create_unit(property_, unit_data)
                 if unit_created:
                     created_units += 1
+                if first_unit is None:
+                    first_unit = unit
+
+        if first_unit and first_unit.tenant_id is None:
+            first_unit.tenant_id = tenant.id
 
         db.session.commit()
 
@@ -145,6 +176,10 @@ def seed() -> None:
 
         if admin_created:
             print(f"\nAdmin login: {ADMIN_EMAIL} / {DEFAULT_ADMIN_PASSWORD}")
+        if tenant_created:
+            print(f"Tenant login: {TENANT_EMAIL} / {DEFAULT_TENANT_PASSWORD}")
+        if first_unit and first_unit.tenant_id == tenant.id:
+            print(f"Demo tenant linked to unit {first_unit.unit_number}")
 
 
 if __name__ == "__main__":
