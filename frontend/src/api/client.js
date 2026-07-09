@@ -69,6 +69,7 @@ export const api = {
   createInspection: (payload) => request('/api/inspections', { method: 'POST', body: payload }),
   updateInspection: (id, payload) =>
     request(`/api/inspections/${id}`, { method: 'PATCH', body: payload }),
+  getTenantLease: () => request('/api/tenant/lease'),
 }
 
 const INSPECTION_STATUSES = ['scheduled', 'in_progress', 'completed', 'cancelled']
