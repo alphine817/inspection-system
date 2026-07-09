@@ -34,11 +34,11 @@ The project focuses on step-by-step workflow tracking, secure data handling, rea
 ## 🛠️ Local Development
 
 ### Web Application
-From the repository root:
+Go to the frontend folder from the repository root:
 ```bash
 cd frontend
-# Install packages
-# Start dev server
+npm install
+npm run dev
 📈 Key Concepts & Notes
 Unified Workflow: Managed as a single monorepo, keeping frontend layouts and backend APIs synchronized under one commit history.
 
