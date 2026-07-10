@@ -24,6 +24,15 @@ export function formatNumber(value) {
   return new Intl.NumberFormat().format(value ?? 0)
 }
 
+export function formatCurrency(value) {
+  if (value == null) return '—'
+  return new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: 'KES',
+    maximumFractionDigits: 0,
+  }).format(value)
+}
+
 export function getPropertyLabel(property) {
   if (!property) return 'Unknown property'
   return property.name

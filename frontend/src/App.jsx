@@ -11,6 +11,7 @@ import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
 import ManagerDashboard from './pages/ManagerDashboard'
 import PropertiesPage from './pages/PropertiesPage'
+import PublicListingsPage from './pages/PublicListingsPage'
 import SettingsPage from './pages/SettingsPage'
 import SignUpPage from './pages/SignUpPage'
 import TenantDashboard from './pages/TenantDashboard'
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUpPage />,
+  },
+  {
+    path: '/listings',
+    element: <PublicListingsPage />,
   },
   {
     element: (

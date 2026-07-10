@@ -1,15 +1,49 @@
 import { useState } from 'react'
 import { Home, Menu, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import ThemeToggle from '../ui/ThemeToggle'
 
 const navLinks = [
-  { href: '#features', label: 'Features' },
-  { href: '#how-it-works', label: 'How It Works' },
-  { href: '#rent-automation', label: 'Rent Automation' },
-  { href: '#pricing', label: 'Pricing' },
-  { href: '#contact', label: 'Contact' },
+  { hash: 'features', label: 'Features' },
+  { hash: 'how-it-works', label: 'How It Works' },
+  { hash: 'rent-automation', label: 'Rent Automation' },
+  { hash: 'pricing', label: 'Pricing' },
+  { hash: 'contact', label: 'Contact' },
+  { href: '/listings', label: 'Find a Rental', isRoute: true },
 ]
+
+const linkClassName =
+  'group relative rounded-lg py-1 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:text-brand-600 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:text-brand-400'
+
+const mobileLinkClassName =
+  'rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-400'
+
+function NavSectionLink({ hash, label, className, onNavigate }) {
+  const location = useLocation()
+
+  function handleClick(event) {
+    onNavigate?.()
+
+    if (location.pathname !== '/') return
+
+    event.preventDefault()
+    const element = document.getElementById(hash)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.history.replaceState(null, '', `#${hash}`)
+    }
+  }
+
+  return (
+    <Link to={{ pathname: '/', hash }} onClick={handleClick} className={className}>
+      {label}
+      <span
+        className="absolute inset-x-0 -bottom-1 h-0.5 origin-left scale-x-0 rounded-full bg-brand-600 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+        aria-hidden="true"
+      />
+    </Link>
+  )
+}
 
 export default function LandingNavbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -35,19 +69,24 @@ export default function LandingNavbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Landing navigation">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="group relative rounded-lg py-1 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:text-brand-600 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:text-brand-400"
-            >
-              {link.label}
-              <span
-                className="absolute inset-x-0 -bottom-1 h-0.5 origin-left scale-x-0 rounded-full bg-brand-600 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-                aria-hidden="true"
+          {navLinks.map((link) =>
+            link.isRoute ? (
+              <Link key={link.href} to={link.href} className={linkClassName}>
+                {link.label}
+                <span
+                  className="absolute inset-x-0 -bottom-1 h-0.5 origin-left scale-x-0 rounded-full bg-brand-600 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                  aria-hidden="true"
+                />
+              </Link>
+            ) : (
+              <NavSectionLink
+                key={link.hash}
+                hash={link.hash}
+                label={link.label}
+                className={linkClassName}
               />
-            </a>
-          ))}
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
@@ -87,16 +126,26 @@ export default function LandingNavbar() {
         ].join(' ')}
       >
         <nav className="flex flex-col gap-1" aria-label="Mobile landing navigation">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-400"
-              onClick={closeMenu}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.isRoute ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={mobileLinkClassName}
+                onClick={closeMenu}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <NavSectionLink
+                key={link.hash}
+                hash={link.hash}
+                label={link.label}
+                className={mobileLinkClassName}
+                onNavigate={closeMenu}
+              />
+            ),
+          )}
           <Link
             to="/login"
             className="rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-400"

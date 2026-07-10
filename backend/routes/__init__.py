@@ -1,4 +1,5 @@
 from routes.auth_routes import auth_bp
+from routes.booking_routes import bookings_bp
 from routes.dashboard_routes import dashboard_bp
 from routes.inspection_routes import inspections_bp
 from routes.property_routes import properties_bp
@@ -10,6 +11,7 @@ from routes.user_routes import users_bp
 def register_routes(app) -> None:
     """Register all API blueprints on the Flask app."""
     app.register_blueprint(auth_bp)
+    app.register_blueprint(bookings_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(users_bp)
     app.register_blueprint(properties_bp)

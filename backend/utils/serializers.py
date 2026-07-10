@@ -35,8 +35,39 @@ def serialize_unit(unit) -> dict:
         "bathrooms": unit.bathrooms,
         "square_feet": unit.square_feet,
         "monthly_rent": unit.monthly_rent,
+        "image_url": unit.image_url,
         "tenant_id": unit.tenant_id,
         "is_active": unit.is_active,
+        "status": "vacant" if unit.tenant_id is None else "occupied",
+    }
+
+
+def serialize_public_listing(unit) -> dict:
+    property_ = unit.property
+    return {
+        "id": unit.id,
+        "unit_number": unit.unit_number,
+        "bedrooms": unit.bedrooms,
+        "bathrooms": unit.bathrooms,
+        "square_feet": unit.square_feet,
+        "monthly_rent": unit.monthly_rent,
+        "image_url": unit.image_url,
+        "status": "Vacant",
+        "property_name": property_.name,
+        "property_address": property_.full_address,
+        "city": property_.city,
+        "state": property_.state,
+    }
+
+
+def serialize_booking(booking, account_created: bool = False) -> dict:
+    return {
+        "id": booking.id,
+        "unit_id": booking.unit_id,
+        "user_id": booking.user_id,
+        "preferred_move_in_date": booking.preferred_move_in_date.date().isoformat(),
+        "status": booking.status.value,
+        "account_created": account_created,
     }
 
 

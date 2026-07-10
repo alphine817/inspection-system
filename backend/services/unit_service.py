@@ -28,6 +28,17 @@ class UnitService:
         return Unit.query.order_by(Unit.property_id, Unit.unit_number).all()
 
     @staticmethod
+    def list_vacant() -> list[Unit]:
+        return (
+            Unit.query.filter(
+                Unit.is_active.is_(True),
+                Unit.tenant_id.is_(None),
+            )
+            .order_by(Unit.property_id, Unit.unit_number)
+            .all()
+        )
+
+    @staticmethod
     def create(unit: Unit) -> Unit:
         db.session.add(unit)
         db.session.commit()

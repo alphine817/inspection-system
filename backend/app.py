@@ -19,8 +19,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 register_routes(app)
 
-def _ensure_unit_monthly_rent_column() -> None:
-    """Add monthly_rent to existing SQLite databases created before the column existed."""
+def _ensure_unit_columns() -> None:
+    """Add columns to existing SQLite databases created before they existed."""
     from sqlalchemy import inspect, text
 
     inspector = inspect(db.engine)
@@ -28,16 +28,20 @@ def _ensure_unit_monthly_rent_column() -> None:
         return
 
     columns = {column["name"] for column in inspector.get_columns("units")}
-    if "monthly_rent" in columns:
-        return
+    migrations = {
+        "monthly_rent": "ALTER TABLE units ADD COLUMN monthly_rent FLOAT",
+        "image_url": "ALTER TABLE units ADD COLUMN image_url VARCHAR(500)",
+    }
 
     with db.engine.begin() as connection:
-        connection.execute(text("ALTER TABLE units ADD COLUMN monthly_rent FLOAT"))
+        for column_name, statement in migrations.items():
+            if column_name not in columns:
+                connection.execute(text(statement))
 
 
 with app.app_context():
     db.create_all()
-    _ensure_unit_monthly_rent_column()
+    _ensure_unit_columns()
 
 
 @app.route("/api/health", methods=["GET"])

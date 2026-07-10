@@ -55,6 +55,15 @@ class ItemCondition(str, enum.Enum):
     FAILED = "failed"
 
 
+class BookingStatus(str, enum.Enum):
+    """Lifecycle state of a rental booking request."""
+
+    PENDING = "pending"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    CANCELLED = "cancelled"
+
+
 # ---------------------------------------------------------------------------
 # Models
 # ---------------------------------------------------------------------------
@@ -190,6 +199,7 @@ class Unit(db.Model):
     bathrooms: Mapped[Optional[float]]
     square_feet: Mapped[Optional[int]]
     monthly_rent: Mapped[Optional[float]]
+    image_url: Mapped[Optional[str]] = mapped_column(String(500))
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
     # Nullable when the unit is vacant
@@ -211,6 +221,10 @@ class Unit(db.Model):
         foreign_keys=[tenant_id],
     )
     inspections: Mapped[List["Inspection"]] = relationship(
+        back_populates="unit",
+        cascade="all, delete-orphan",
+    )
+    bookings: Mapped[List["Booking"]] = relationship(
         back_populates="unit",
         cascade="all, delete-orphan",
     )
@@ -314,4 +328,49 @@ class InspectionItem(db.Model):
         return (
             f"<InspectionItem id={self.id} inspection_id={self.inspection_id} "
             f"room={self.room_name!r} item={self.item_name!r} condition={self.condition.value}>"
+        )
+
+
+class Booking(db.Model):
+    """
+    Rental booking request submitted by a prospective or existing tenant.
+
+    Links an applicant user account to a vacant unit with a preferred move-in date.
+    """
+
+    __tablename__ = "bookings"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    unit_id: Mapped[int] = mapped_column(
+        ForeignKey("units.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    preferred_move_in_date: Mapped[datetime] = mapped_column(nullable=False)
+    status: Mapped[BookingStatus] = mapped_column(
+        SQLEnum(BookingStatus, name="booking_status", native_enum=False),
+        nullable=False,
+        default=BookingStatus.PENDING,
+        index=True,
+    )
+
+    created_at: Mapped[datetime] = mapped_column(default=_utcnow, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        default=_utcnow,
+        onupdate=_utcnow,
+        nullable=False,
+    )
+
+    unit: Mapped["Unit"] = relationship(back_populates="bookings")
+    user: Mapped["User"] = relationship(foreign_keys=[user_id])
+
+    def __repr__(self) -> str:
+        return (
+            f"<Booking id={self.id} unit_id={self.unit_id} user_id={self.user_id} "
+            f"status={self.status.value}>"
         )

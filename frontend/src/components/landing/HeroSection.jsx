@@ -55,14 +55,19 @@ export default function HeroSection() {
           </ul>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link to="/signup">
+            <Link to="/listings">
               <Button size="lg" className="w-full sm:w-auto">
-                Get Started
+                Find a Rental
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </Link>
-            <Link to="/login">
+            <Link to="/signup">
               <Button variant="secondary" size="lg" className="w-full sm:w-auto">
+                Get Started
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button variant="ghost" size="lg" className="w-full sm:w-auto">
                 View Dashboard
               </Button>
             </Link>
