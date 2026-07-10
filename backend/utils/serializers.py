@@ -26,6 +26,20 @@ def serialize_property(property_) -> dict:
     }
 
 
+def serialize_unit(unit) -> dict:
+    return {
+        "id": unit.id,
+        "property_id": unit.property_id,
+        "unit_number": unit.unit_number,
+        "bedrooms": unit.bedrooms,
+        "bathrooms": unit.bathrooms,
+        "square_feet": unit.square_feet,
+        "monthly_rent": unit.monthly_rent,
+        "tenant_id": unit.tenant_id,
+        "is_active": unit.is_active,
+    }
+
+
 def serialize_tenant_lease(unit) -> dict:
     property_ = unit.property
     return {

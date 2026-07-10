@@ -66,6 +66,7 @@ export const api = {
   },
   createUser: (payload) => request('/api/users', { method: 'POST', body: payload }),
   createProperty: (payload) => request('/api/properties', { method: 'POST', body: payload }),
+  createUnit: (payload) => request('/api/units', { method: 'POST', body: payload }),
   createInspection: (payload) => request('/api/inspections', { method: 'POST', body: payload }),
   updateInspection: (id, payload) =>
     request(`/api/inspections/${id}`, { method: 'PATCH', body: payload }),

@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
 
 from services.unit_service import UnitService
+from utils.http import error_response, require_json_fields
+from utils.serializers import serialize_unit
 
 units_bp = Blueprint("units", __name__, url_prefix="/api/units")
 
@@ -14,16 +16,45 @@ def list_units():
     else:
         units = UnitService.list_all()
 
-    return jsonify([
-        {
-            "id": unit.id,
-            "property_id": unit.property_id,
-            "unit_number": unit.unit_number,
-            "bedrooms": unit.bedrooms,
-            "bathrooms": unit.bathrooms,
-            "square_feet": unit.square_feet,
-            "tenant_id": unit.tenant_id,
-            "is_active": unit.is_active,
-        }
-        for unit in units
-    ])
+    return jsonify([serialize_unit(unit) for unit in units])
+
+
+@units_bp.route("", methods=["POST"])
+def create_unit():
+    payload = request.get_json(silent=True)
+    validation_error = require_json_fields(payload, "property_id", "unit_number")
+    if validation_error:
+        return error_response(validation_error)
+
+    try:
+        property_id = int(payload["property_id"])
+    except (TypeError, ValueError):
+        return error_response("property_id must be a valid integer.")
+
+    try:
+        unit = UnitService.create_from_payload(
+            {
+                "property_id": property_id,
+                "unit_number": payload["unit_number"],
+                "bedrooms": _optional_int(payload.get("bedrooms")),
+                "bathrooms": _optional_float(payload.get("bathrooms")),
+                "square_feet": _optional_int(payload.get("square_feet")),
+                "monthly_rent": _optional_float(payload.get("monthly_rent")),
+            }
+        )
+    except ValueError as exc:
+        return error_response(str(exc))
+
+    return jsonify(serialize_unit(unit)), 201
+
+
+def _optional_int(value):
+    if value is None or value == "":
+        return None
+    return int(value)
+
+
+def _optional_float(value):
+    if value is None or value == "":
+        return None
+    return float(value)

@@ -9,6 +9,7 @@ export default function PropertiesGrid({
   unitsByProperty,
   loading,
   onAddProperty,
+  onAddUnit,
   hasSearch = false,
 }) {
   if (loading) {
@@ -46,6 +47,7 @@ export default function PropertiesGrid({
           key={property.id}
           property={property}
           units={unitsByProperty[property.id] ?? []}
+          onAddUnit={onAddUnit}
         />
       ))}
     </div>

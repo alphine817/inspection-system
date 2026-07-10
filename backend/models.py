@@ -189,6 +189,7 @@ class Unit(db.Model):
     bedrooms: Mapped[Optional[int]]
     bathrooms: Mapped[Optional[float]]
     square_feet: Mapped[Optional[int]]
+    monthly_rent: Mapped[Optional[float]]
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
     # Nullable when the unit is vacant

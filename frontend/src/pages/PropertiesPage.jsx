@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react'
 import { Building2, Home, Users } from 'lucide-react'
 import { getPropertiesPageData } from '../api/client'
 import AddPropertyForm from '../components/properties/AddPropertyForm'
+import AddUnitForm from '../components/properties/AddUnitForm'
 import PropertiesGrid, { PropertiesToolbar } from '../components/properties/PropertiesGrid'
 import ErrorState from '../components/ui/ErrorState'
 import { StatCardSkeleton } from '../components/ui/Skeleton'
@@ -39,6 +40,8 @@ function SummaryStat({ label, value, icon: Icon, tone = 'neutral' }) {
 export default function PropertiesPage() {
   const formRef = useRef(null)
   const [search, setSearch] = useState('')
+  const [sidebarMode, setSidebarMode] = useState('property')
+  const [selectedProperty, setSelectedProperty] = useState(null)
   const { data, loading, error, refetch } = useAsyncData(getPropertiesPageData, [])
 
   useRegisterRefetch(refetch)
@@ -83,8 +86,26 @@ export default function PropertiesPage() {
     }
   }, [data])
 
-  function scrollToAddForm() {
+  function scrollToSidebar() {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  function showAddPropertyForm() {
+    setSidebarMode('property')
+    setSelectedProperty(null)
+    scrollToSidebar()
+  }
+
+  function showAddUnitForm(property) {
+    setSidebarMode('unit')
+    setSelectedProperty(property)
+    scrollToSidebar()
+  }
+
+  function handleUnitSubmitted() {
+    refetch()
+    setSidebarMode('property')
+    setSelectedProperty(null)
   }
 
   if (error) {
@@ -122,7 +143,7 @@ export default function PropertiesPage() {
           <PropertiesToolbar
             search={search}
             onSearchChange={setSearch}
-            onAddProperty={scrollToAddForm}
+            onAddProperty={showAddPropertyForm}
             resultCount={filteredProperties.length}
           />
 
@@ -131,14 +152,25 @@ export default function PropertiesPage() {
               properties={filteredProperties}
               unitsByProperty={unitsByProperty}
               loading={loading}
-              onAddProperty={scrollToAddForm}
+              onAddProperty={showAddPropertyForm}
+              onAddUnit={showAddUnitForm}
               hasSearch={Boolean(search.trim())}
             />
           </div>
         </section>
 
         <div ref={formRef}>
-          <AddPropertyForm onSubmitted={refetch} />
+          {sidebarMode === 'unit' && selectedProperty ? (
+            <AddUnitForm
+              key={selectedProperty.id}
+              propertyId={selectedProperty.id}
+              propertyName={selectedProperty.name}
+              onSubmitted={handleUnitSubmitted}
+              onCancel={showAddPropertyForm}
+            />
+          ) : (
+            <AddPropertyForm onSubmitted={refetch} />
+          )}
         </div>
       </div>
     </div>

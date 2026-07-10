@@ -1,6 +1,7 @@
 from typing import Optional
 
 from models import Unit, db
+from services.property_service import PropertyService
 
 
 class UnitService:
@@ -31,3 +32,24 @@ class UnitService:
         db.session.add(unit)
         db.session.commit()
         return unit
+
+    @staticmethod
+    def create_from_payload(data: dict) -> Unit:
+        property_id = data["property_id"]
+        unit_number = str(data["unit_number"]).strip()
+
+        if not PropertyService.get_by_id(property_id):
+            raise ValueError("Property not found.")
+
+        if UnitService.get_by_property_and_number(property_id, unit_number):
+            raise ValueError("A unit with this number already exists for this property.")
+
+        unit = Unit(
+            property_id=property_id,
+            unit_number=unit_number,
+            bedrooms=data.get("bedrooms"),
+            bathrooms=data.get("bathrooms"),
+            square_feet=data.get("square_feet"),
+            monthly_rent=data.get("monthly_rent"),
+        )
+        return UnitService.create(unit)
